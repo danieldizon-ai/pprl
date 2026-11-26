@@ -6,5 +6,6 @@ Licensed under the Apache License, Version 2.0 (see LICENSE).
 This project cites and builds on the published research of Always Foundation
 ("Privacy-Preserving Record Linkage for Gospel Impact Research", 2026, and
 ADR 0013 in github.com/alwaysfoundation/always-platform). It contains no code
-from Always Foundation and is not affiliated with or endorsed by it.
+from Always Foundation's platform. Always Foundation stewards this repository
+as an open reference.
 "Always" and "Always Foundation" are trademarks of Always Foundation.

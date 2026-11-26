@@ -116,7 +116,8 @@ configuration.
 - **Small name vocabulary.** With ~120 family names the attack's success rate
   is far higher than against a real population with tens of thousands of
   names, and the attacker here knows the true frequency ranking exactly. The
-  comparison between encodings is the point, not the 49.9 %.
+  useful result is the comparison between encodings; the 49.9 % figure itself
+  will not transfer.
 - **One weak attack.** Frequency alignment is a lower bound on leakage.
   Pattern-mining and graph-matching attacks (Christen et al. 2018;
   Vidanage et al. 2020) can recover q-grams from multi-field CLKs given enough
@@ -135,6 +136,7 @@ exact keyed hashing on imperfect data, and the cost of hardening is a few
 points of recall. It does not change the deployment question. The residual
 risks are key custody, dependence on an independent intermediary, the
 threat environment, and the absence of a formal leakage bound. Those
-risks sit outside the algorithm, and they are why the approach is presented
-here as a reference artefact rather than a recommendation to deploy. See the
-README's Conclusion section and `threat-model.md` §7.
+risks sit outside the algorithm. For that reason the work is concluded as a
+reference artefact, published by Always Foundation as an open reference,
+and is not intended for deployment. See the README's Conclusion and
+Status and next steps sections, and `threat-model.md` §7.
