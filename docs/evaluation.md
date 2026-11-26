@@ -126,3 +126,15 @@ configuration.
   clerical-review band between two thresholds would change the trade-off.
 - **F-measure.** Reported for comparability with the literature; Hand and
   Christen (2018) explain why it should not be the only criterion.
+
+## Conclusion
+
+The evaluation answers the technical question the Always Foundation case
+study left open. Error-tolerant Bloom-filter linkage substantially outperforms
+exact keyed hashing on imperfect data, and the cost of hardening is a few
+points of recall. It does not change the deployment question. The residual
+risks are key custody, dependence on an independent intermediary, the
+threat environment, and the absence of a formal leakage bound. Those
+risks sit outside the algorithm, and they are why the approach is presented
+here as a reference artefact rather than a recommendation to deploy. See the
+README's Conclusion section and `threat-model.md` §7.

@@ -24,6 +24,7 @@ pprl-experiments --out docs/results.md   # regenerates every number in docs/eval
 - [Usage](#usage)
 - [Results](#results)
 - [Design decisions](#design-decisions)
+- [Conclusion](#conclusion)
 - [Responsible use](#responsible-use)
 - [Documentation](#documentation)
 - [References](#references)
@@ -190,6 +191,63 @@ the design they would replace, not against nothing.
 
 **Hardening is opt-in and documented as partial.** Each transform is tied to
 the specific attack it targets, and the evaluation shows what it does not do.
+
+## Conclusion
+
+**The technique works; the deployment conditions are the problem.**
+
+On synthetic data, keyed Bloom-filter linkage does what it claims. It recovers
+most true matches that exact keyed hashing misses (88 % against 47 % recall at
+medium corruption, at 97 % precision). Linkage runs on encodings alone, and
+known hardening and salting measures reduce specific, documented leaks. As an
+engineering question, privacy-preserving linkage across independent
+organisations is feasible.
+
+Whether to operate it is a different question. Always Foundation, and the
+author as a founding contributor, decided not to deploy it (ADR 0013). The
+reasons are about trust and operations, not algorithms:
+
+1. **The security reduces to key custody.** Without the key, encodings resist
+   dictionary attack. With it, every low-entropy field (date of birth, postcode,
+   phone number, common names) can be enumerated and every record re-identified
+   (threat T2). Some party must hold that key for the life of the project, and
+   the protection of every record then depends on that party's operational
+   security, staff and future decisions.
+2. **The three-party model needs an intermediary that is actually independent.**
+   The protocol assumes a linkage unit that never sees the key, does not collude
+   with a custodian, and keeps linkage separate from analysis (assumptions A1
+   to A5). Health systems meet these with statutory linkage units, enabling
+   legislation, ethics review and audit. A voluntary network of organisations
+   has none of these, and an operator that is also a participant cannot be its
+   own independent party.
+3. **The threat environment makes a linked dataset a target.** A link map of
+   sensitive participation is valuable to attackers and subject to compelled
+   disclosure (T6). Its sensitivity grows with every organisation that joins
+   (T7). The Australian Signals Directorate reported more than 1,200 incidents
+   in 2024–25, up 11 % year on year (as cited in the Always Foundation case
+   study). Cryptography withstands theft of encodings. It does not withstand
+   compromise of the key holder, and it cannot make a dataset safe that should
+   not exist.
+4. **No formal guarantee bounds the leakage.** Bloom-filter encodings leak
+   similarity and structure by design. Hardening raises the cost of known
+   attacks but proves nothing about unknown ones (`docs/privacy.md`).
+
+This repository is therefore a **reference artefact**. It shows what is
+technically achievable and measures the accuracy and leakage trade-offs, for
+researchers and organisations examining the same question. Anyone taking the
+work further should do so only in a tightly controlled setting, with these
+minimum conditions:
+
+- synthetic or ethics-approved sample data, never live operational records;
+- an independent linkage party with no other role in the project;
+- a key generated per study, held in a key management system (ideally split
+  between custodians), and destroyed on a fixed date with the destruction
+  recorded;
+- linked outputs released only in aggregate, with small cells suppressed;
+- a defined end date after which link maps and encodings are deleted.
+
+For production use across independent organisations, the trust and custody
+requirements are, in our assessment, too difficult to meet reliably.
 
 ## Responsible use
 
