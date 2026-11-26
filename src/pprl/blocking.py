@@ -203,7 +203,8 @@ class HammingLSHBlocker:
         table_offset = np.arange(self.tables, dtype=np.int64)[:, None] << np.int64(
             self.bits_per_table
         )
-        return keys + table_offset
+        out: npt.NDArray[np.int64] = keys + table_offset
+        return out
 
     def candidates(self, a: BitMatrix, b: BitMatrix) -> tuple[IndexArray, IndexArray]:
         ka = self.table_keys(a)

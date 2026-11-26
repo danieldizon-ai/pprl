@@ -19,7 +19,8 @@ IndexArray = npt.NDArray[np.int64]
 
 def popcount(bits: BitMatrix) -> npt.NDArray[np.int64]:
     """Number of set bits in each row."""
-    return np.bitwise_count(bits).sum(axis=1, dtype=np.int64)
+    out: npt.NDArray[np.int64] = np.bitwise_count(bits).sum(axis=1, dtype=np.int64)
+    return out
 
 
 def _check(a: BitMatrix, b: BitMatrix) -> None:
@@ -78,7 +79,8 @@ def hamming_pairs(a: BitMatrix, b: BitMatrix, ia: IndexArray, ib: IndexArray) ->
     _check(a, b)
     if ia.size == 0:
         return np.zeros(0, dtype=np.int64)
-    return np.bitwise_count(a[ia] ^ b[ib]).sum(axis=1, dtype=np.int64)
+    out: IndexArray = np.bitwise_count(a[ia] ^ b[ib]).sum(axis=1, dtype=np.int64)
+    return out
 
 
 def dice(a: BitMatrix, b: BitMatrix) -> float:

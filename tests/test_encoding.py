@@ -1,4 +1,5 @@
 import numpy as np
+import numpy.typing as npt
 import pytest
 from hypothesis import given, settings
 from hypothesis import strategies as st
@@ -15,7 +16,7 @@ REC = {"given_name": "Olivia", "family_name": "Nguyen", "dob": "1990-03-14", "po
 
 
 @given(arrays(np.bool_, st.tuples(st.integers(0, 5), st.integers(1, 300))))
-def test_pack_unpack_roundtrip(bits: np.ndarray) -> None:
+def test_pack_unpack_roundtrip(bits: npt.NDArray[np.bool_]) -> None:
     packed = pack_bits(bits)
     assert packed.dtype == np.uint64
     assert packed.shape == (bits.shape[0], -(-bits.shape[1] // 64))

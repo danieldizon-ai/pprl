@@ -19,6 +19,7 @@ from dataclasses import dataclass, field
 from datetime import date, timedelta
 
 import numpy as np
+import numpy.typing as npt
 
 __all__ = ["CorruptionProfile", "LinkageDataset", "Person", "generate_linkage_dataset"]
 
@@ -72,9 +73,10 @@ NICKNAMES: dict[str, tuple[str, ...]] = {
 # fmt: on
 
 
-def _zipf_weights(n: int, s: float) -> np.ndarray:
-    w = 1.0 / np.arange(1, n + 1) ** s
-    return w / w.sum()
+def _zipf_weights(n: int, s: float) -> npt.NDArray[np.float64]:
+    w: npt.NDArray[np.float64] = 1.0 / np.arange(1, n + 1, dtype=np.float64) ** s
+    out: npt.NDArray[np.float64] = w / w.sum()
+    return out
 
 
 @dataclass(frozen=True)
@@ -129,8 +131,8 @@ class LinkageDataset:
 
     a: list[dict[str, str | None]]
     b: list[dict[str, str | None]]
-    entity_a: np.ndarray
-    entity_b: np.ndarray
+    entity_a: npt.NDArray[np.int64]
+    entity_b: npt.NDArray[np.int64]
     true_links: set[tuple[int, int]] = field(default_factory=set)
 
     @property

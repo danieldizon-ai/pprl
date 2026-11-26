@@ -1,4 +1,5 @@
 import numpy as np
+import numpy.typing as npt
 from hypothesis import given
 from hypothesis import strategies as st
 from hypothesis.extra.numpy import arrays
@@ -10,7 +11,9 @@ bitrows = arrays(np.bool_, st.tuples(st.integers(1, 6), st.just(130)))
 
 
 @given(bitrows, bitrows)
-def test_vectorised_metrics_match_reference(x: np.ndarray, y: np.ndarray) -> None:
+def test_vectorised_metrics_match_reference(
+    x: npt.NDArray[np.bool_], y: npt.NDArray[np.bool_]
+) -> None:
     a, b = pack_bits(x), pack_bits(y)
     ia = np.repeat(np.arange(x.shape[0]), y.shape[0]).astype(np.int64)
     ib = np.tile(np.arange(y.shape[0]), x.shape[0]).astype(np.int64)

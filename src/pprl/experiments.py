@@ -24,6 +24,7 @@ from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 
 import numpy as np
+import numpy.typing as npt
 
 from .attacks import frequency_alignment_attack, rows_as_tokens
 from .blocking import HammingLSHBlocker
@@ -91,7 +92,9 @@ def _fmt(xs: Sequence[float]) -> str:
     return f"{statistics.fmean(xs):.3f} ± {statistics.stdev(xs):.3f}"
 
 
-def _score(method: Method, key: SecretKey, ds: LinkageDataset) -> tuple[np.ndarray, ...]:
+def _score(
+    method: Method, key: SecretKey, ds: LinkageDataset
+) -> tuple[npt.NDArray[np.int64], npt.NDArray[np.int64], npt.NDArray[np.float64]]:
     enc = CLKEncoder(DEFAULT_SCHEMA, key, 1024, method.hardening)
     a = enc.encode(ds.a)
     b = enc.encode(ds.b)
