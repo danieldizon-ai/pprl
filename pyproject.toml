@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pprl"
+version = "0.1.0"
+description = "Privacy-preserving record linkage: keyed Bloom-filter (CLK) encoding, hardening, blocking, matching, evaluation and attack baselines."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.10"
+authors = [{ name = "Daniel Dizon" }]
+keywords = ["record linkage", "privacy", "bloom filter", "CLK", "entity resolution"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Topic :: Security :: Cryptography",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+  "Typing :: Typed",
+]
+dependencies = ["numpy>=2.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "hypothesis>=6.100", "mypy>=1.10", "ruff>=0.5"]
+
+[project.scripts]
+pprl-experiments = "pprl.experiments:main"
+
+[project.urls]
+Source = "https://github.com/DanielDizon-AI/pprl"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pprl"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+
+[tool.mypy]
+strict = true
+files = ["src", "tests"]
+
+[[tool.mypy.overrides]]
+module = ["hypothesis.*"]
+ignore_missing_imports = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "N", "S", "SIM", "RUF", "PL"]
+ignore = ["PLR0913", "PLR2004", "S311", "RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "PLR2004"]
