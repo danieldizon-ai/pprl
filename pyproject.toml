@@ -29,7 +29,7 @@ dev = ["pytest>=8", "hypothesis>=6.100", "mypy>=1.10", "ruff>=0.5"]
 pprl-experiments = "pprl.experiments:main"
 
 [project.urls]
-Source = "https://github.com/DanielDizon-AI/pprl"
+Source = "https://github.com/alwaysfoundation/pprl"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pprl"]

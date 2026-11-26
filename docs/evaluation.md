@@ -137,6 +137,6 @@ points of recall. It does not change the deployment question. The residual
 risks are key custody, dependence on an independent intermediary, the
 threat environment, and the absence of a formal leakage bound. Those
 risks sit outside the algorithm. For that reason the work is concluded as a
-reference artefact, to be contributed to Always Foundation as an open
-reference, and is not intended for deployment. See the README's Conclusion and
+reference artefact, published by Always Foundation as an open reference,
+and is not intended for deployment. See the README's Conclusion and
 Status and next steps sections, and `threat-model.md` §7.

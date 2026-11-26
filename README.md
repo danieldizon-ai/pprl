@@ -1,8 +1,8 @@
 # pprl
 
-> **Status: concluded research.** The work is complete and will not be
-> developed into a deployed system. It is intended for contribution to Always
-> Foundation as an open reference. See [Status and next steps](#status-and-next-steps).
+> **Status: concluded research, stewarded by Always Foundation.** The work is
+> complete and will not be developed into a deployed system. Always Foundation
+> publishes it as an open reference. See [Status and next steps](#status-and-next-steps).
 
 Privacy-preserving record linkage in Python: keyed Bloom-filter (CLK)
 encodings with optional hardening, blocking, similarity scoring and
@@ -47,7 +47,7 @@ The study left two technical questions open:
 2. **Bloom filters were not adopted**, partly because of published
    cryptanalysis of Bloom-filter encodings.
 
-This library is independent work that takes up both questions in general
+This library, written by Daniel Dizon, takes up both questions in general
 terms: it implements the standard error-tolerant alternative (CLKs), the
 hardening techniques proposed in response to the cryptanalysis, and an
 evaluation that measures both linkage quality and leakage on synthetic data.
@@ -263,11 +263,10 @@ sets out why it should not be deployed across independent organisations.
 
 What happens next:
 
-- **Contribution to Always Foundation.** The intent is to offer the code,
-  threat model and evaluation to Always Foundation for publication as an open
-  reference alongside its case study and ADR 0013, so the evidence behind that
-  decision is available in one place. Until then it remains here under the
-  same licences.
+- **Published by Always Foundation.** The code, threat model and evaluation
+  are stewarded by Always Foundation and published as an open reference
+  alongside its case study and ADR 0013, so the evidence behind that decision
+  is available in one place, under the same licences.
 - **Maintenance only.** No new features or production hardening are planned.
   Fixes that keep the tests, the experiments and the documented results
   reproducible are welcome.
@@ -324,5 +323,5 @@ consent and independent oversight.
 ## Licence and attribution
 
 Code under the Apache License 2.0 (`LICENSE`). Written by Daniel Dizon with
-AI assistance (Claude); see the commit trailers. Not affiliated with or
-endorsed by Always Foundation.
+AI assistance (Claude); see the commit trailers. Stewarded by Always
+Foundation as an open reference.
