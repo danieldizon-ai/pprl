@@ -102,7 +102,14 @@ records ─▶ normalise ─▶ tokenise ─▶ HMAC positions ─▶ Bloom filt
 
 ```python
 from pprl import CLKEncoder, FieldSpec, HammingLSHBlocker, SecretKey, dice_pairs, one_to_one
-from pprl.normalise import DateParts, Positional, QGrams, normalise_date, normalise_digits, normalise_name
+from pprl.normalise import (
+    DateParts,
+    Positional,
+    QGrams,
+    normalise_date,
+    normalise_digits,
+    normalise_name,
+)
 
 schema = [
     FieldSpec("given_name", normalise_name, QGrams(2), hashes=10),
@@ -114,7 +121,7 @@ schema = [
 # At each custodian, with the shared key:
 key = SecretKey.from_hex(shared_key_hex)
 encoder = CLKEncoder(schema, key, length=1024)
-encodings_a = encoder.encode(records_a)      # numpy uint64, shape (n, 16)
+encodings_a = encoder.encode(records_a)  # numpy uint64, shape (n, 16)
 
 # At the linkage unit, with encodings only:
 ia, ib = HammingLSHBlocker(encoder.output_length, bits_per_table=32, tables=40).candidates(
