@@ -1,5 +1,9 @@
 # pprl
 
+> **Status: concluded research.** The work is complete and will not be
+> developed into a deployed system. It is intended for contribution to Always
+> Foundation as an open reference. See [Status and next steps](#status-and-next-steps).
+
 Privacy-preserving record linkage in Python: keyed Bloom-filter (CLK)
 encodings with optional hardening, blocking, similarity scoring and
 one-to-one matching, plus a synthetic-data evaluation and an attack baseline
@@ -25,6 +29,7 @@ pprl-experiments --out docs/results.md   # regenerates every number in docs/eval
 - [Results](#results)
 - [Design decisions](#design-decisions)
 - [Conclusion](#conclusion)
+- [Status and next steps](#status-and-next-steps)
 - [Responsible use](#responsible-use)
 - [Documentation](#documentation)
 - [References](#references)
@@ -187,7 +192,7 @@ would overstate quality.
 
 **Deterministic baseline included.** Keyed-hash exact matching is in the
 library so that the cost and benefit of Bloom filters are measured against
-the design they would replace, not against nothing.
+the design they would replace.
 
 **Hardening is opt-in and documented as partial.** Each transform is tied to
 the specific attack it targets, and the evaluation shows what it does not do.
@@ -205,7 +210,7 @@ organisations is feasible.
 
 Whether to operate it is a different question. Always Foundation, and the
 author as a founding contributor, decided not to deploy it (ADR 0013). The
-reasons are about trust and operations, not algorithms:
+reasons concern trust and operations:
 
 1. **The security reduces to key custody.** Without the key, encodings resist
    dictionary attack. With it, every low-entropy field (date of birth, postcode,
@@ -248,6 +253,27 @@ minimum conditions:
 
 For production use across independent organisations, the trust and custody
 requirements are, in our assessment, too difficult to meet reliably.
+
+## Status and next steps
+
+The research question this repository set out to answer is closed. The
+evaluation shows that keyed Bloom-filter linkage is technically feasible and
+measurably more accurate than exact keyed hashing, and the Conclusion above
+sets out why it should not be deployed across independent organisations.
+
+What happens next:
+
+- **Contribution to Always Foundation.** The intent is to offer the code,
+  threat model and evaluation to Always Foundation for publication as an open
+  reference alongside its case study and ADR 0013, so the evidence behind that
+  decision is available in one place. Until then it remains here under the
+  same licences.
+- **Maintenance only.** No new features or production hardening are planned.
+  Fixes that keep the tests, the experiments and the documented results
+  reproducible are welcome.
+- **No deployment.** The library will not be integrated into Always Foundation
+  systems or any other live service. Researchers who reuse it should follow
+  the minimum conditions listed in the Conclusion.
 
 ## Responsible use
 
